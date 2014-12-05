@@ -1,6 +1,3 @@
-<?php
-	session_start();
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -61,7 +58,7 @@ h1	{
 	<h1 align="center"> Music Library </h1>
     <div align="center" id="login" > 
     	<div id="table">
-		<form method="post" action="index.php">
+		<form name="login" method="post" action="checkLogin.php">
         	<table align="center"> 
             	<tr>
                 	<td id="input"> Username : </td> 
@@ -74,7 +71,7 @@ h1	{
                 </tr>
                 <br/>
                 <tr>
-                	<td> <input id="unibutton" type="submit" value="Sign In" />  </td> 
+                	<td> <input id="unibutton" name="Submit" type="submit" value="Sign In" />  </td> 
                     <td align="center"> <button id="unibutton"><a style="text-decoration:none; color:inherit;" href="signup.php"> Sign Up </a> </button> </td> 
                 </tr>
             </table>
@@ -82,42 +79,6 @@ h1	{
         </div>
     </div>
 <body>
-<?php
-	
-	$username = null; 
-	$password = null;
-	
-		
-	if(isset($_POST['username']) && isset($_POST['password']) ) 
-	{
-		$username = $_POST['username'];
-		$password = $_POST['password']; 
-	}
-	
-	$servername = "localhost";
-	$serverusername = "root";
-	$password = "";
-	$dbname = "music library";
 
-// Create connection
-$conn = new mysqli($servername, $serverusername, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-     die("Connection failed: " . $conn->connect_error);
-} 
-
-
-$sql = "SELECT Password FROM user WHERE Username = '$username' ";
-$result = $conn->query($sql);
-$row = $result->fetch_assoc(); 
-
-if($row["Password"] == $password)
-{
-	header("Location: http://localhost/ml/main.php");
-}
-//username
-$_SESSION["uname"] = "something";
-
-?>
 </body>
 </html>

@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -97,6 +100,9 @@ td 	   {
 
 
 
+</body>
+
+</html>
  <?php
 	
 	$searchby = null;
@@ -149,7 +155,6 @@ if ($result->num_rows > 0) {
 					<th>Dislikes</th>
 				</tr>";
      // output data of each row
-	 $row =$result->fetch_assoc();
 	 
     while($row = $result->fetch_assoc())
 	 {
@@ -171,8 +176,5 @@ if ($result->num_rows > 0) {
 else 
 	echo "result is 0" ; 
 
+echo "<font color='red'>".$_SESSION['test']."</font>";
 ?>
-
-</body>
-
-</html>
