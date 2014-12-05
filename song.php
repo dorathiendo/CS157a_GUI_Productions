@@ -3,7 +3,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Music Library</title>
+<<<<<<< HEAD
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+=======
+
+>>>>>>> 18e856fccde5d7074a0636f9c9c0e76ada139b89
 <style> 
 body{
 		background-image:url(images/background.jpg)	
@@ -106,6 +110,7 @@ margin-bottom: 20px;
 	<div id = "likebuttons" class="inner">
 	<input type="button" value="Like" id="likeButton" onclick="like();"/>
 	<input type="button" value="Dislike" id="disLikeButton" onclick="disLike();"/>
+
 	</div>
 	<div id="bar" class="inner">
 		<div id="likes"></div>
@@ -182,8 +187,8 @@ var likes="<?php echo $likes; ?>",
 
 dislikes="<?php echo $dislikes; ?>"
 
-likeID = "<?php echo $song_id; ?>"
-;
+likeID = "<?php echo $song_id; ?>";
+
 
 //Functions to increase likes and immediately calculate bar widths
 function like(){
@@ -206,8 +211,10 @@ function disLike(){
 				success: function(){location.reload();}
 				
             });
+
 	calculateBar();
 }
+
 
 function activate()
 {
@@ -232,7 +239,6 @@ function calculateBar(){
     //We add the numbers on the buttons, just to show how to
     document.getElementById('likeButton').value="Likes ("+likes.toString()+")";
     document.getElementById('disLikeButton').value="Disikes ("+dislikes.toString()+")";
-
 }
 
 calculateBar();

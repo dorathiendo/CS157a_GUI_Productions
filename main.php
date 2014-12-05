@@ -66,10 +66,15 @@ th    {
 td 	   {
 		font-size:24px;
 		}
+#account {
+	text-decoration: none;
+	color: white;
+}
 </style>
 </head>
 
 <body>
+<a id="account" href="account.php">Account Settings</a>
 <div align="center">
      <form action="main.php" method="post"> 
      	 <input name="submit" type="text" id="search"/>
@@ -126,7 +131,7 @@ else if(isset($_POST['submit']))
 	//echo "searchby is: ". $searchby;
 	$sql = "SELECT * FROM song INNER JOIN Likes ON Song.songID = Likes.songID WHERE Title LIKE '%$searchby%' OR Artists LIKE '%$searchby%' OR Genre LIKE '%$searchby%' OR ReleaseDate LIKE '$%searchby%'";
     	
-	echo $sql;
+	//echo $sql;
 }
 
 $result = $conn->query($sql);
