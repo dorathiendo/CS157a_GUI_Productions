@@ -66,10 +66,15 @@ th    {
 td 	   {
 		font-size:24px;
 		}
+#account {
+	text-decoration: none;
+	color: white;
+}
 </style>
 </head>
 
 <body>
+<a id="account" href="account.php">Account Settings</a>
 <div align="center">
      <form action="main.php" method="post"> 
      	 <input name="submit" type="text" id="search"/>
@@ -126,7 +131,7 @@ else if(isset($_POST['submit']))
 	//echo "searchby is: ". $searchby;
 	$sql = "SELECT * FROM song INNER JOIN Likes ON Song.songID = Likes.songID WHERE Title LIKE '%$searchby%' OR Artists LIKE '%$searchby%' OR Genre LIKE '%$searchby%' OR ReleaseDate LIKE '$%searchby%'";
     	
-	echo $sql;
+	//echo $sql;
 }
 
 $result = $conn->query($sql);
@@ -151,7 +156,7 @@ if ($result->num_rows > 0) {
 	 $idOfSong=$row["songID"];
       echo "<tr align='center'> 
 		  <td> <img width='150px' height='150px' src='" . $row["AlbumCover"]. " '/> </td> 
-		  <td><a href = 'http://localhost/ml/song.php?songID=".$idOfSong."'>" .$row["Title"]. " </a></td>
+		  <td><a href = 'song.php?songID=".$idOfSong."'>" .$row["Title"]. " </a></td>
 		  <td>" .$row["Artists"]."</td>
 		  <td>".$row["Length"]." </td>
 		  <td> ".$row["Genre"]."</td> 
