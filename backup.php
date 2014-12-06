@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	$DB_Server = "localhost"; // MySQL Server
 	$DB_Username = "root"; // MySQL Username
 	$DB_Password = ""; // MySQL Password
@@ -8,7 +9,8 @@
 	
 	/***** DO NOT EDIT BELOW LINES *****/
 	// Create MySQL connection
-	$sql = "SELECT Title,Artists,AlbumCover,Length,Genre,ReleaseDate FROM Library,Song WHERE library.songID = song.songID AND userID = '10003';";
+	$userID = $_SESSION["userID"];
+	$sql = "SELECT Title,Artists,AlbumCover,Length,Genre,ReleaseDate FROM Library,Song WHERE library.songID = song.songID AND userID = '$userID';";
 	$Connect = @mysql_connect($DB_Server, $DB_Username, $DB_Password) or die("Failed to connect to MySQL:<br />" . mysql_error() . "<br />" . mysql_errno());
 	// Select database
 	$Db = @mysql_select_db($DB_DBName, $Connect) or die("Failed to select database:<br />" . mysql_error(). "<br />" . mysql_errno());

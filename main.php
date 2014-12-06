@@ -111,7 +111,8 @@ margin-top:-100px;
 <body>
 <div> 
 	    <?php echo "<font id='account'> Welcome". " " . $_SESSION["username"]. "</font>" ?> &nbsp;&nbsp;
-		<a id = "account" href="likeme.php"> Similar Users </a> 
+		<a id = "account" href="likeme.php"> Similar Users </a>  &nbsp;&nbsp;
+        <a id = "account" href="library.php"> My Library </a>   &nbsp;&nbsp;
 </div>
 <div id = "settings"> 
 	  
@@ -213,10 +214,20 @@ if ($result->num_rows > 0) {
 	 
     while($row = $result->fetch_assoc())
 	 {
+	 $usertype = $_SESSION["userType"];
 	 $idOfSong=$row["songID"];
+	 $link = "";
+	 if(strcmp($usertype,"Regular"))
+	 {
+	 	$link = "song.php?songID=".$idOfSong;
+	 }
+	 if (!strcmp($usertype,"Professional"))
+	 {
+		 $link = "profsong.php?songID=".$idOfSong;
+	 }
       echo "<tr align='center'> 
 		  <td> <img width='150px' height='150px' src='" . $row["AlbumCover"]. " '/> </td> 
-		  <td><a href = 'song.php?songID=".$idOfSong."'>" .$row["Title"]. " </a></td>
+		  <td><a href = '$link'>" .$row["Title"]. " </a></td>
 		  <td>" .$row["Artists"]."</td>
 		  <td>".$row["Length"]." </td>
 		  <td> ".$row["Genre"]."</td> 
@@ -238,3 +249,4 @@ header("location:index.php");
 }
 
 ?>
+<!--<td><a href = 'song.php?songID=".$idOfSong."'>" .$row["Title"]. " </a></td>->

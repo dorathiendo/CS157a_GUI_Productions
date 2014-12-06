@@ -109,7 +109,7 @@ if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "SELECT l1.userID,l2.userID,song.Title as title from library as l1, library as l2, song Where l1.userID = $userID and l1.userID < l2.userID and l1.songID = l2.songID ";	
+$sql = "SELECT l1.userID,l2.userID,song.Title as title from library as l1, library as l2, song Where l1.userID = $userID and l1.userID <> l2.userID and l1.songID = l2.songID and l1.songID = song.songID";	
  	
 $result = $conn->query($sql);
 
@@ -130,7 +130,7 @@ if ($result->num_rows > 0)
 	
 }
 else
-{echo "<font id='account'> No user share your interest. </font>";} 
+{echo "Error: " . $sql . "<br>" . $conn->error;} 
  ?>
 </body>
 </html>

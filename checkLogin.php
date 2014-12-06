@@ -27,6 +27,7 @@ if($row["Username"] == $username && $row["Password"] == $password)
 	$_SESSION["userid"] = $row["userID"];
 	$_SESSION["username"] = $row["Username"];
 	$_SESSION['userID'] = $sessionUserID;
+	$_SESSION["userType"] = $row["userType"];
 	//$_SESSION["username"] = $row["Username"];
 	$_SESSION['pass']=$password; 
 
