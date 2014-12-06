@@ -109,7 +109,7 @@ h1	{
 	
 	$servername = "localhost";
 	$serverusername = "root";
-	$password = "admin";
+	$password = "";
 	$dbname = "music library";
 
 // Create connection
