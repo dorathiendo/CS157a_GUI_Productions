@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Music Library</title>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-
+<script src="reviewScript.js"></script>
 <style> 
 body{
 		background-image:url(images/background.jpg)	
@@ -103,7 +103,7 @@ margin-left:94px;
 #reviewDiv
 {
 float:right;
-margin-top:50px;
+margin-top:-95px;
 margin-right:32px;
 }
 
@@ -218,23 +218,24 @@ while($row = $result->fetch_assoc())
      }
 	
      echo "</table>";
-}	 
+}
+ 
 ?>
 
 <div id="reviewDiv">
 
-<form action="action_page.php" id = "reviewTextBox">
-Review:
-<textarea name="comment" form="reviewTextBox">Put your review here...</textarea>
-<input type="submit" value="Submit" height:"100%">
-</form>
-
+<div id="form">
+<div>
+<textarea id="comment">Put your review here...</textarea>
+<input id="submit" type="button" value="Submit">
+</div>
+</div>
 </div>
 </body>
 <script type="text/javascript">
 var likes="<?php echo $likes; ?>", 
 
-dislikes="<?php echo $dislikes; ?>"
+dislikes="<?php echo $dislikes; ?>",
 
 likeID = "<?php echo $song_id; ?>";
 
@@ -302,8 +303,10 @@ function disLike(){
 				success: function(){location.reload();}
 				
             });
+			
 
 	calculateBar();
+	
 }
 </script>
 </html>
