@@ -112,13 +112,10 @@ lib{
 		$song_id = $_POST['sid'];
 		$song_id = substr($song_id,0,3);
 	}
-<<<<<<< HEAD
+	
 	$userID = $_SESSION["userID"]; 
 	$addSong_query = "INSERT INTO library VALUES ('$userID', '$song_id');";
-=======
-	
-	$addSong_query = "INSERT INTO Library VALUES ('10003', '$song_id');"; //replace 10003 with session
->>>>>>> origin/master
+
 	
 	$servername = "localhost";
 	$serverusername = "root";
