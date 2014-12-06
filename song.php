@@ -193,7 +193,7 @@ if ($result->num_rows > 0) {
 		  <td>".$row["noOfDislikes"]." </td> 
 		  <td>
 			<form method=\"POST\" action=\"library.php\">
-				<input type=\"hidden\" name=\"sid\" Value=".$row["songID"]."/>
+				<input type=\"hidden\" name=\"sid\" value=".$row["songID"]."/>
 				<input type=\"submit\" value=\"Add\"/>				
 			</form>
 		  </td>

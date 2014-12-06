@@ -106,12 +106,14 @@ lib{
 <br /> 
 
  <?php
+ 	session_start();
 	$song_id = "";
 	if(isset($_POST['sid'])){
 		$song_id = $_POST['sid'];
+		$song_id = substr($song_id,0,3);
 	}
-	
-	$addSong_query = "INSERT INTO Library VALUES ('10003', '$song_id');";
+	$userID = $_SESSION["userID"]; 
+	$addSong_query = "INSERT INTO library VALUES ('$userID', '$song_id');";
 	
 	$servername = "localhost";
 	$serverusername = "root";
@@ -123,11 +125,15 @@ $conn = new mysqli($servername, $serverusername, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
-} 
+}
 
-$addsongresult = $conn->query($addSong_query);
+if ($conn->query($addSong_query) === TRUE) {
+    echo "New record created successfully";
+}
+else
+{echo "Error: " . $addSong_query . "<br>" . $conn->error;}
 
-$sql = "SELECT * FROM Library,Song,Likes WHERE Library.songID = Song.songID AND Library.songID = Likes.songID AND userID = '10003'"; //replace 10003 with phpsession
+$sql = "SELECT * FROM Library,Song,Likes WHERE Library.songID = Song.songID AND Library.songID = Likes.songID AND userID = '$userID'"; //replace 10003 with phpsession
 
 if(isset($_POST['submit'])) {
 		//echo "searchby is: ". $searchby;
@@ -147,6 +153,7 @@ if ($result->num_rows > 0) {
 					<th>Release Date</th>
 					<th>Likes</th>
 					<th>Dislikes</th>
+					<th> Remove </th> 
 				</tr>";
 
 	 
@@ -162,6 +169,9 @@ if ($result->num_rows > 0) {
 		  <td>".$row["ReleaseDate"]." </td> 
 		  <td>".$row["noOfLikes"]." </td> 
 		  <td>".$row["noOfDislikes"]." </td> 
+		  <td> <form method='POST' action='deletelibrary.php'>
+		  <input type='hidden' name='sid' value='$idOfSong'/>
+		  <input type='submit' value='Remove'> </input> </form> </td> 
 	  </tr>";
      }
 	
