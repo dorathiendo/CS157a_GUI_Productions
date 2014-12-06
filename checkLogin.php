@@ -17,13 +17,22 @@ $sql = "SELECT * FROM user WHERE Username = '$username' AND Password='$password'
 	
 $result = $conn->query($sql);
 $row = $result->fetch_assoc(); 
+
+$sessionUserID = $row["userID"];
+
 if($row["Username"] == $username && $row["Password"] == $password)
 {
 
 // Register $username, $password as session variables and redirect to file "main.php"
+<<<<<<< HEAD
 	$_SESSION["userid"] = $row["userID"];
 	$_SESSION["username"] = $row["Username"];
 	
+=======
+
+$_SESSION['userID'] = $sessionUserID;
+$_SESSION['pass']=$password; 
+>>>>>>> origin/master
 header("location:main.php");
 }
 else 
