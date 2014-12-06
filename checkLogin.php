@@ -23,12 +23,22 @@ $sessionUserID = $row["userID"];
 if($row["Username"] == $username && $row["Password"] == $password)
 {
 
+<<<<<<< HEAD
 	$_SESSION["userid"] = $row["userID"];
 	$_SESSION["username"] = $row["Username"];
 	$_SESSION['userID'] = $sessionUserID;
 	//$_SESSION["username"] = $row["Username"];
 	$_SESSION['pass']=$password; 
 
+=======
+// Register $username, $password as session variables and redirect to file "main.php"
+
+
+$_SESSION['userID'] = $sessionUserID;
+$_SESSION["username"] = $row["Username"];
+$_SESSION['pass']=$password; 
+
+>>>>>>> origin/master
 header("location:main.php");
 }
 else 
