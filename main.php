@@ -95,6 +95,7 @@ margin-top:-100px;
 <body>
 <div> 
 	    <?php echo "<font id='account'> Welcome". " " . $_SESSION["username"]. "</font>" ?> &nbsp;&nbsp;
+		<a id = "account" href="likeme.php"> Similar Users </a> 
 </div>
 <div id = "settings"> 
 	  
@@ -108,7 +109,7 @@ margin-top:-100px;
      	 <input name="submit" type="text" id="search"/>
         <input type="submit" id="unibutton" value="Search"/>
      </form> 
- </div> <br />	
+ </div> <br />		
  <div align="center"> 
  	<form id="search" action="main.php" method="post">
     Categories:
