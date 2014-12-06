@@ -49,7 +49,8 @@
 				}
 				
 				//change 'Dora' to session username
-				$sql = "SELECT * FROM User WHERE Username = 'Dora'";
+				$username = $_SESSION["username"] ; 
+				$sql = "SELECT * FROM User WHERE Username = '$username' ";
 				$result = $conn->query($sql);
 				while($row = $result->fetch_assoc()){
 					echo $row["Username"];

@@ -21,8 +21,9 @@ if($row["Username"] == $username && $row["Password"] == $password)
 {
 
 // Register $username, $password as session variables and redirect to file "main.php"
-$_SESSION['favcolor'] = 'green';
-$_SESSION['pass']=$password; 
+	$_SESSION["userid"] = $row["userID"];
+	$_SESSION["username"] = $row["Username"];
+	
 header("location:main.php");
 }
 else 
