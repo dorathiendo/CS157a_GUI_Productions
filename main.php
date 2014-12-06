@@ -89,6 +89,22 @@ margin-top:-100px;
 	font-size: 40px;
 	text-align: center;
 }
+.link{
+	text-decoration: none;
+	color: white;
+}
+#newrel{
+	color:white;
+	font-size: 30px;
+	border-radius: 5px;
+	border: 2px solid;
+	border-color: white;
+	width: 200px;
+	text-align: center;
+	margin-left: auto;
+    margin-right: auto;
+	margin-top: 10px;
+}
 </style>
 </head>
 
@@ -122,8 +138,8 @@ margin-top:-100px;
             <input type="submit" name="submit" id="unibutton"  value="Club"/>
     </form>
  </div>
-<div align="center" class="top">
-	<a href="newrelease.php">New Releases</a>
+<div id="newrel">
+	<a href="newrelease.php" class="link">New Releases</a>
 </div>
 <br /> 
 </body>
