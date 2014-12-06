@@ -83,7 +83,12 @@ float:right;
 {
 width: 150px;
 margin-top:-100px;
-
+}
+#mostliked{
+	color: white;
+	font-size: 40px;
+	text-align: center;
+}
 </style>
 </head>
 
@@ -116,10 +121,8 @@ margin-top:-100px;
             <input type="submit" name="submit" id="unibutton"  value="Club"/>
     </form>
  </div>
+ 
 <br /> 
-
-
-
 </body>
 
 </html>
@@ -143,6 +146,18 @@ $conn = new mysqli($servername, $serverusername, $password, $dbname);
 if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
 } 
+
+$mostlikedquery = "SELECT title, artists FROM Song WHERE songID IN (SELECT songID FROM Likes WHERE noOfLikes IN (SELECT MAX(noOfLikes) FROM Likes));";
+
+$mostlikedresult = $conn->query($mostlikedquery);
+
+if ($mostlikedresult->num_rows > 0) {
+while($row = $mostlikedresult->fetch_assoc())
+	{
+		echo "<div id=\"mostliked\" align=\"center\">
+			Current Most Liked Song: ".$row["title"]." by ".$row["artists"]."</div>";
+	}
+}
 
 if(isset($_SESSION['userID'])) 
 {
