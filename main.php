@@ -69,24 +69,35 @@ th    {
 td 	   {
 		font-size:24px;
 		}
+		
+#settings{
+float:right;
+}
+		
 #account {
 	text-decoration: none;
 	color: white;
 }
-#logout {
-	text-decoration: none;
-	color: white;
-}
+
+#logoutButton
+{
+width: 150px;
+margin-top:-100px;
+
 </style>
 </head>
 
 <body>
 <div> 
 	    <?php echo "<font id='account'> Welcome". " " . $_SESSION["username"]. "</font>" ?> &nbsp;&nbsp;
-    	<a id="account" href="account.php">Account Settings</a> &nbsp;&nbsp;
-    	<a id ="logout" href="logout.php">Logout</a> &nbsp;&nbsp;
+</div>
+<div id = "settings"> 
+	  
+    	<a id="account" href="account.php"><button type="button">Account Settings</button></a> &nbsp;&nbsp;
+    	<a id ="logout" href="logout.php"><button type="button">Logout</button></a> &nbsp;&nbsp;
 
 </div>
+
 <div align="center">
      <form action="main.php" method="post"> 
      	 <input name="submit" type="text" id="search"/>
@@ -133,7 +144,8 @@ if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
 } 
 
-
+if(isset($_SESSION['userID'])) 
+{
 $sql = "SELECT * FROM Song INNER JOIN Likes ON Song.songID = Likes.songID";
 
 
@@ -185,5 +197,10 @@ if ($result->num_rows > 0) {
 else 
 	echo "result is 0" ; 
 
-//echo "<font color='red'>".$_SESSION['test']."</font>";
+}
+else
+{
+header("location:index.php");
+}
+
 ?>
