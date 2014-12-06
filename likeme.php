@@ -89,7 +89,7 @@ margin-top:-100px;
 <body>
  <?php 
  
- 	$userID = $_SESSION["userid"]; 
+ 	$userID = $_SESSION["userID"]; 
 	$searchby = null;
 		
 	if(isset($_POST['submit'])) 
