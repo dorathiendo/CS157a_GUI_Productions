@@ -79,12 +79,17 @@ td 	   {
 float:right;
 width: 150px;
 margin-top:-100px;
-}
+
 </style>
 </head>
 
 <body>
-<a id="account" href="account.php">Account Settings</a>
+<div> 
+	    <?php echo "<font id='account'> Welcome". " " . $_SESSION["username"]. "</font>" ?> &nbsp;&nbsp;
+    	<a id="account" href="account.php">Account Settings</a> &nbsp;&nbsp;
+    	<a id ="logout" href="logout.php">Logout</a> &nbsp;&nbsp;
+
+</div>
 <div align="center">
      <form action="main.php" method="post"> 
      	 <input name="submit" type="text" id="search"/>
@@ -185,9 +190,11 @@ if ($result->num_rows > 0) {
 }
 else 
 	echo "result is 0" ; 
+<<<<<<< HEAD
 }
 else
 {
 header("location:index.php");
 }
+
 ?>

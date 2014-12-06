@@ -49,7 +49,9 @@
 				}
 				
 				//change 'Dora' to session username
+
 				$sql = "SELECT * FROM User WHERE userID = ".$_SESSION['userID']."";
+
 				$result = $conn->query($sql);
 				while($row = $result->fetch_assoc()){
 					echo $row["Username"];
@@ -75,6 +77,8 @@
 			?>
 			<br>
 			<a href="main.php">Go Back</a>
+			<br>
+			<a href="backup.php">Export my library to excel</a>
 		</div>
 	</body>
 </html>
