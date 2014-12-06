@@ -69,6 +69,11 @@ th    {
 td 	   {
 		font-size:24px;
 		}
+		
+#settings{
+float:right;
+}
+		
 #account {
 	text-decoration: none;
 	color: white;
@@ -76,7 +81,6 @@ td 	   {
 
 #logoutButton
 {
-float:right;
 width: 150px;
 margin-top:-100px;
 
@@ -86,10 +90,14 @@ margin-top:-100px;
 <body>
 <div> 
 	    <?php echo "<font id='account'> Welcome". " " . $_SESSION["username"]. "</font>" ?> &nbsp;&nbsp;
-    	<a id="account" href="account.php">Account Settings</a> &nbsp;&nbsp;
-    	<a id ="logout" href="logout.php">Logout</a> &nbsp;&nbsp;
+</div>
+<div id = "settings"> 
+	  
+    	<a id="account" href="account.php"><button type="button">Account Settings</button></a> &nbsp;&nbsp;
+    	<a id ="logout" href="logout.php"><button type="button">Logout</button></a> &nbsp;&nbsp;
 
 </div>
+
 <div align="center">
      <form action="main.php" method="post"> 
      	 <input name="submit" type="text" id="search"/>
@@ -110,9 +118,7 @@ margin-top:-100px;
  </div>
 <br /> 
 
-<form action="logout.php" method="get" id="logoutButton">
-  <input type="submit" value="Logout">
-</form>
+
 
 </body>
 
@@ -190,7 +196,7 @@ if ($result->num_rows > 0) {
 }
 else 
 	echo "result is 0" ; 
-<<<<<<< HEAD
+
 }
 else
 {

@@ -3,11 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Music Library</title>
-<<<<<<< HEAD
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-=======
 
->>>>>>> 18e856fccde5d7074a0636f9c9c0e76ada139b89
 <style> 
 body{
 		background-image:url(images/background.jpg)	
@@ -100,7 +97,22 @@ float:bottom;
 width: 50%;
 margin-top:100px;
 margin-left:94px;
+
 }
+
+#reviewDiv
+{
+float:right;
+margin-top:50px;
+margin-right:32px;
+}
+
+textarea {
+    resize: none;
+	height:200px;
+	width:500px;
+}
+
 </style>
 </head>
 
@@ -124,17 +136,6 @@ margin-left:94px;
 	</div>
 </div>
 
-<div>
-
-<form action="action_page.php">
-Review:<br>
-<input type="text" name="review" value="Put your review here!">
-<br>
-<input type="submit" value="Submit">
-</form>
-
-</div>
-</body>
  
   <?php
   	$servername = "localhost";
@@ -219,6 +220,16 @@ while($row = $result->fetch_assoc())
      echo "</table>";
 }	 
 ?>
+
+<div id="reviewDiv">
+
+<form action="action_page.php" id = "reviewTextBox">
+Review:
+<textarea name="comment" form="reviewTextBox">Put your review here...</textarea>
+<input type="submit" value="Submit" height:"100%">
+</form>
+
+</div>
 </body>
 <script type="text/javascript">
 var likes="<?php echo $likes; ?>", 
