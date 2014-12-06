@@ -111,8 +111,13 @@ margin-top:-100px;
 <body>
 <div> 
 	    <?php echo "<font id='account'> Welcome". " " . $_SESSION["username"]. "</font>" ?> &nbsp;&nbsp;
+<<<<<<< HEAD
 		<a id = "account" href="likeme.php"> Similar Users </a>  &nbsp;&nbsp;
         <a id = "account" href="library.php"> My Library </a>   &nbsp;&nbsp;
+=======
+		<a class= "link" href="likeme.php"> Similar Users </a> &nbsp;
+		<a class="link" href="library.php">My Library</a>
+>>>>>>> origin/master
 </div>
 <div id = "settings"> 
 	  
@@ -190,10 +195,7 @@ if($searchby == "Pop" || $searchby == "Hip-Hop" || $searchby == "Alternative" ||
 }
 else if(isset($_POST['submit']))
 {
-	//echo "searchby is: ". $searchby;
-	$sql = "SELECT * FROM song INNER JOIN Likes ON Song.songID = Likes.songID WHERE Title LIKE '%$searchby%' OR Artists LIKE '%$searchby%' OR Genre LIKE '%$searchby%' OR ReleaseDate LIKE '$%searchby%'";
-    	
-	//echo $sql;
+	$sql = "SELECT * FROM song INNER JOIN Likes ON Song.songID = Likes.songID WHERE Title LIKE '%$searchby%' OR Artists LIKE '%$searchby%' OR Genre LIKE '%$searchby%' OR ReleaseDate LIKE '%$searchby%'";
 }
 
 $result = $conn->query($sql);
