@@ -94,6 +94,12 @@ margin-right:100px;
 margin-bottom: 20px;
 }
 
+#userTable
+{
+float:bottom;
+width: 50%;
+margin-top:100px;
+margin-left:94px;
 }
 </style>
 </head>
@@ -116,6 +122,17 @@ margin-bottom: 20px;
 		<div id="likes"></div>
 		<div id="dislikes"></div>
 	</div>
+</div>
+
+<div>
+
+<form action="action_page.php">
+Review:<br>
+<input type="text" name="review" value="Put your review here!">
+<br>
+<input type="submit" value="Submit">
+</form>
+
 </div>
 </body>
  
@@ -179,7 +196,28 @@ if ($result->num_rows > 0) {
 }
 else 
 	echo "result is 0" ; 
+	
+//User Reviews 	
+$sql = "SELECT Username, Review FROM user,UserReview WHERE songID = '".$song_id."' and UserReview.userID=user.userID" ;
 
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+     echo "<table id='userTable'>
+	 			<tr>
+					<th>User</th>
+					<th>Review</th>
+</tr>";
+while($row = $result->fetch_assoc())
+	 {
+      echo "<tr align='center'> 
+		   <td>" .$row["Username"]."</td>
+		   <td>" .$row["Review"]. " </td>
+		   </tr>";
+     }
+	
+     echo "</table>";
+}	 
 ?>
 </body>
 <script type="text/javascript">
@@ -242,5 +280,19 @@ function calculateBar(){
 }
 
 calculateBar();
+
+//Calls the review.php which adds the review to our sql table
+function disLike(){
+	dislikes++;
+		 $.ajax({
+	            type: "POST",
+                url: "disLikeUpdate.php" ,
+				data: {'disLikeID':likeID},
+				success: function(){location.reload();}
+				
+            });
+
+	calculateBar();
+}
 </script>
 </html>
