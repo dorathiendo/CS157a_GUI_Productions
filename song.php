@@ -175,6 +175,7 @@ if ($result->num_rows > 0) {
 					<th>Release Date</th>
 					<th>Likes</th>
 					<th>Dislikes</th>
+					<th>Add to Library</th>
 				</tr>";
      // output data of each row
     while($row = $result->fetch_assoc())
@@ -190,6 +191,12 @@ if ($result->num_rows > 0) {
 		  <td>".$row["ReleaseDate"]." </td> 
 		  <td>".$row["noOfLikes"]." </td> 
 		  <td>".$row["noOfDislikes"]." </td> 
+		  <td>
+			<form method=\"POST\" action=\"library.php\">
+				<input type=\"hidden\" name=\"sid\" Value=".$row["songID"]."/>
+				<input type=\"submit\" value=\"Add\"/>				
+			</form>
+		  </td>
 	  </tr>";
      }
 	

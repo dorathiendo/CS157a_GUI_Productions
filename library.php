@@ -106,14 +106,12 @@ lib{
 <br /> 
 
  <?php
-	
-/*	$searchby = null;
-		
-	if(isset($_POST['submit'])) 
-	{
-		$searchby = $_POST['submit']; 
+	$song_id = "";
+	if(isset($_POST['sid'])){
+		$song_id = $_POST['sid'];
 	}
-*/
+	
+	$addSong_query = "INSERT INTO Library VALUES ('10003', '$song_id');";
 	
 	$servername = "localhost";
 	$serverusername = "root";
@@ -127,31 +125,17 @@ if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
 } 
 
+$addsongresult = $conn->query($addSong_query);
 
-$sql = "SELECT * FROM Song INNER JOIN Likes ON Song.songID = Likes.songID";
+$sql = "SELECT * FROM Library,Song,Likes WHERE Library.songID = Song.songID AND Library.songID = Likes.songID AND userID = '10003'"; //replace 10003 with phpsession
 
-
-/*if($searchby == "Pop" || $searchby == "Hip-Hop" || $searchby == "Alternative" || $searchby == "Country" || $searchby == "Indie" || $searchby == "Electronic" || $searchby == "Club" ) 
-{
-	$sql = "SELECT * FROM song INNER JOIN Likes ON Song.songID = Likes.songID WHERE Genre = '$searchby'"; 	
-}
-else if(isset($_POST['submit']))
-{
-	//echo "searchby is: ". $searchby;
-	$sql = "SELECT * FROM song INNER JOIN Likes ON Song.songID = Likes.songID WHERE Title LIKE '%$searchby%' OR Artists LIKE '%$searchby%' OR Genre LIKE '%$searchby%' OR ReleaseDate LIKE '$%searchby%'";
-    	
-	//echo $sql;
-}
-*/
 if(isset($_POST['submit'])) {
 		//echo "searchby is: ". $searchby;
 		$sql = "SELECT * FROM song INNER JOIN Likes ON Song.songID = Likes.songID WHERE Title LIKE '%$searchby%' OR Artists LIKE '%$searchby%' OR Genre LIKE '%$searchby%' OR ReleaseDate LIKE '$%searchby%'";
-			
-		//echo $sql;
+
 	}
 
 $result = $conn->query($sql);
-
 if ($result->num_rows > 0) {
      echo "<table align='center'>
 	 			<tr>
@@ -164,8 +148,7 @@ if ($result->num_rows > 0) {
 					<th>Likes</th>
 					<th>Dislikes</th>
 				</tr>";
-     // output data of each row
-	 $row =$result->fetch_assoc();
+
 	 
     while($row = $result->fetch_assoc())
 	 {
