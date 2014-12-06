@@ -106,14 +106,16 @@ lib{
 <br /> 
 
  <?php
-	
-/*	$searchby = null;
-		
-	if(isset($_POST['submit'])) 
-	{
-		$searchby = $_POST['submit']; 
+ 	session_start();
+	$song_id = "";
+	if(isset($_POST['sid'])){
+		$song_id = $_POST['sid'];
+		$song_id = substr($song_id,0,3);
 	}
-*/
+	
+	$userID = $_SESSION["userID"]; 
+	$addSong_query = "INSERT INTO library VALUES ('$userID', '$song_id');";
+
 	
 	$servername = "localhost";
 	$serverusername = "root";
@@ -125,33 +127,23 @@ $conn = new mysqli($servername, $serverusername, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
-} 
-
-
-$sql = "SELECT * FROM Song INNER JOIN Likes ON Song.songID = Likes.songID";
-
-
-/*if($searchby == "Pop" || $searchby == "Hip-Hop" || $searchby == "Alternative" || $searchby == "Country" || $searchby == "Indie" || $searchby == "Electronic" || $searchby == "Club" ) 
-{
-	$sql = "SELECT * FROM song INNER JOIN Likes ON Song.songID = Likes.songID WHERE Genre = '$searchby'"; 	
 }
-else if(isset($_POST['submit']))
-{
-	//echo "searchby is: ". $searchby;
-	$sql = "SELECT * FROM song INNER JOIN Likes ON Song.songID = Likes.songID WHERE Title LIKE '%$searchby%' OR Artists LIKE '%$searchby%' OR Genre LIKE '%$searchby%' OR ReleaseDate LIKE '$%searchby%'";
-    	
-	//echo $sql;
+
+if ($conn->query($addSong_query) === TRUE) {
+    echo "New record created successfully";
 }
-*/
+else
+{echo "Error: " . $addSong_query . "<br>" . $conn->error;}
+
+$sql = "SELECT * FROM Library,Song,Likes WHERE Library.songID = Song.songID AND Library.songID = Likes.songID AND userID = '$userID'"; //replace 10003 with phpsession
+
 if(isset($_POST['submit'])) {
 		//echo "searchby is: ". $searchby;
 		$sql = "SELECT * FROM song INNER JOIN Likes ON Song.songID = Likes.songID WHERE Title LIKE '%$searchby%' OR Artists LIKE '%$searchby%' OR Genre LIKE '%$searchby%' OR ReleaseDate LIKE '$%searchby%'";
-			
-		//echo $sql;
+
 	}
 
 $result = $conn->query($sql);
-
 if ($result->num_rows > 0) {
      echo "<table align='center'>
 	 			<tr>
@@ -163,9 +155,9 @@ if ($result->num_rows > 0) {
 					<th>Release Date</th>
 					<th>Likes</th>
 					<th>Dislikes</th>
+					<th> Remove </th> 
 				</tr>";
-     // output data of each row
-	 $row =$result->fetch_assoc();
+
 	 
     while($row = $result->fetch_assoc())
 	 {
@@ -179,6 +171,9 @@ if ($result->num_rows > 0) {
 		  <td>".$row["ReleaseDate"]." </td> 
 		  <td>".$row["noOfLikes"]." </td> 
 		  <td>".$row["noOfDislikes"]." </td> 
+		  <td> <form method='POST' action='deletelibrary.php'>
+		  <input type='hidden' name='sid' value='$idOfSong'/>
+		  <input type='submit' value='Remove'> </input> </form> </td> 
 	  </tr>";
      }
 	

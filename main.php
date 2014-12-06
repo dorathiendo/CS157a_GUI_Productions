@@ -83,13 +83,36 @@ float:right;
 {
 width: 150px;
 margin-top:-100px;
-
+}
+.top{
+	color: white;
+	font-size: 40px;
+	text-align: center;
+}
+.link{
+	text-decoration: none;
+	color: white;
+}
+#newrel{
+	color:white;
+	font-size: 30px;
+	border-radius: 5px;
+	border: 2px solid;
+	border-color: white;
+	width: 200px;
+	text-align: center;
+	margin-left: auto;
+    margin-right: auto;
+	margin-top: 10px;
+}
 </style>
 </head>
 
 <body>
 <div> 
 	    <?php echo "<font id='account'> Welcome". " " . $_SESSION["username"]. "</font>" ?> &nbsp;&nbsp;
+		<a class= "link" href="likeme.php"> Similar Users </a> &nbsp;
+		<a class="link" href="library.php">My Library</a>
 </div>
 <div id = "settings"> 
 	  
@@ -103,7 +126,7 @@ margin-top:-100px;
      	 <input name="submit" type="text" id="search"/>
         <input type="submit" id="unibutton" value="Search"/>
      </form> 
- </div> <br />	
+ </div> <br />		
  <div align="center"> 
  	<form id="search" action="main.php" method="post">
     Categories:
@@ -116,10 +139,10 @@ margin-top:-100px;
             <input type="submit" name="submit" id="unibutton"  value="Club"/>
     </form>
  </div>
+<div id="newrel">
+	<a href="newrelease.php" class="link">New Releases</a>
+</div>
 <br /> 
-
-
-
 </body>
 
 </html>
@@ -144,6 +167,18 @@ if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
 } 
 
+$mostlikedquery = "SELECT title, artists FROM Song WHERE songID IN (SELECT songID FROM Likes WHERE noOfLikes IN (SELECT MAX(noOfLikes) FROM Likes));";
+
+$mostlikedresult = $conn->query($mostlikedquery);
+
+if ($mostlikedresult->num_rows > 0) {
+while($row = $mostlikedresult->fetch_assoc())
+	{
+		echo "<div class=\"top\" align=\"center\">
+			Current Most Liked Song: ".$row["title"]." by ".$row["artists"]."</div>";
+	}
+}
+
 if(isset($_SESSION['userID'])) 
 {
 $sql = "SELECT * FROM Song INNER JOIN Likes ON Song.songID = Likes.songID";
@@ -155,10 +190,7 @@ if($searchby == "Pop" || $searchby == "Hip-Hop" || $searchby == "Alternative" ||
 }
 else if(isset($_POST['submit']))
 {
-	//echo "searchby is: ". $searchby;
-	$sql = "SELECT * FROM song INNER JOIN Likes ON Song.songID = Likes.songID WHERE Title LIKE '%$searchby%' OR Artists LIKE '%$searchby%' OR Genre LIKE '%$searchby%' OR ReleaseDate LIKE '$%searchby%'";
-    	
-	//echo $sql;
+	$sql = "SELECT * FROM song INNER JOIN Likes ON Song.songID = Likes.songID WHERE Title LIKE '%$searchby%' OR Artists LIKE '%$searchby%' OR Genre LIKE '%$searchby%' OR ReleaseDate LIKE '%$searchby%'";
 }
 
 $result = $conn->query($sql);
