@@ -2,7 +2,7 @@ $(document).ready(function(){
 $("#submit").click(function(){
 var review = $("#comment").val();
 // Returns successful data submission message when the entered information is stored in database.
-var dataString = 'review1='+ review;
+var dataString = 'review1='+ review+'&songID1='+songID;
 if(review=='')
 {
 alert("Please fill in a review before you submit");
@@ -16,7 +16,7 @@ url: "addReviews.php",
 data: dataString,
 cache: false,
 success: function(result){
-alert(result);
+alert("Added your Review!");
 }
 });
 }

@@ -239,6 +239,7 @@ while($row = $result->fetch_assoc())
 </div>
 </div>
 </body>
+<script>var songID = "<?php echo $song_id; ?>";</script>
 <script type="text/javascript">
 var likes="<?php echo $likes; ?>", 
 
