@@ -132,5 +132,6 @@ if ($result->num_rows > 0)
 else
 {echo "<font id='account'> No user share your interest. </font>";} 
  ?>
+<a id="account" href="main.php">Go Back</a>
 </body>
 </html>
