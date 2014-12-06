@@ -176,4 +176,5 @@ if ($result->num_rows > 0) {
 else 
 	echo "result is 0" ; 
 
+echo "<font color='red'>".$_SESSION['test']."</font>";
 ?>

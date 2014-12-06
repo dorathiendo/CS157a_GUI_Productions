@@ -75,6 +75,8 @@
 			?>
 			<br>
 			<a href="main.php">Go Back</a>
+			<br>
+			<a href="backup.php">Export my library to excel</a>
 		</div>
 	</body>
 </html>
