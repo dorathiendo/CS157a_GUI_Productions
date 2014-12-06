@@ -1,6 +1,3 @@
-<?php
-	session_start();
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -9,7 +6,7 @@
 
 <style> 
 body{
-		background-image:url(images/background.jpg)	
+		background-image:url(images/background.jpg);
 	}
 h1	{
 		font-size:80px;
@@ -69,22 +66,29 @@ th    {
 td 	   {
 		font-size:24px;
 		}
-#account {
+#link {
 	text-decoration: none;
 	color: white;
+}
+a:visited {
+    text-decoration: none;
+}
+lib{
+	color:white;
 }
 </style>
 </head>
 
 <body>
-<a id="account" href="account.php">Account Settings</a>
+<a class="link" href="account.php">Account Settings</a>
+
 <div align="center">
      <form action="main.php" method="post"> 
      	 <input name="submit" type="text" id="search"/>
         <input type="submit" id="unibutton" value="Search"/>
      </form> 
  </div> <br />	
- <div align="center"> 
+<!--<div align="center"> 
  	<form id="search" action="main.php" method="post">
     Categories:
   		 	<input type="submit" name="submit" id="unibutton"  value="Pop"/>
@@ -95,22 +99,21 @@ td 	   {
   			<input type="submit" name="submit" id="unibutton"  value="Electronics"/>
             <input type="submit" name="submit" id="unibutton"  value="Club"/>
     </form>
- </div>
+</div>-->
+<div align="center">
+	<h1>My Library</h1>
+</div>
 <br /> 
 
-
-
-</body>
-
-</html>
  <?php
 	
-	$searchby = null;
+/*	$searchby = null;
 		
 	if(isset($_POST['submit'])) 
 	{
 		$searchby = $_POST['submit']; 
 	}
+*/
 	
 	$servername = "localhost";
 	$serverusername = "root";
@@ -128,7 +131,7 @@ if ($conn->connect_error) {
 $sql = "SELECT * FROM Song INNER JOIN Likes ON Song.songID = Likes.songID";
 
 
-if($searchby == "Pop" || $searchby == "Hip-Hop" || $searchby == "Alternative" || $searchby == "Country" || $searchby == "Indie" || $searchby == "Electronic" || $searchby == "Club" ) 
+/*if($searchby == "Pop" || $searchby == "Hip-Hop" || $searchby == "Alternative" || $searchby == "Country" || $searchby == "Indie" || $searchby == "Electronic" || $searchby == "Club" ) 
 {
 	$sql = "SELECT * FROM song INNER JOIN Likes ON Song.songID = Likes.songID WHERE Genre = '$searchby'"; 	
 }
@@ -139,6 +142,13 @@ else if(isset($_POST['submit']))
     	
 	//echo $sql;
 }
+*/
+if(isset($_POST['submit'])) {
+		//echo "searchby is: ". $searchby;
+		$sql = "SELECT * FROM song INNER JOIN Likes ON Song.songID = Likes.songID WHERE Title LIKE '%$searchby%' OR Artists LIKE '%$searchby%' OR Genre LIKE '%$searchby%' OR ReleaseDate LIKE '$%searchby%'";
+			
+		//echo $sql;
+	}
 
 $result = $conn->query($sql);
 
@@ -155,6 +165,7 @@ if ($result->num_rows > 0) {
 					<th>Dislikes</th>
 				</tr>";
      // output data of each row
+	 $row =$result->fetch_assoc();
 	 
     while($row = $result->fetch_assoc())
 	 {
@@ -177,3 +188,7 @@ else
 	echo "result is 0" ; 
 
 ?>
+
+</body>
+
+</html>
